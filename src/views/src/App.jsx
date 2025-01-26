@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Button } from '@components'
-import './index.css'
 import { Toaster, toast } from 'react-hot-toast'
+
+import { Button } from '@components'
+
+import './index.css'
 
 function App() {
   const [token, setToken] = useState(null)
@@ -21,10 +23,11 @@ function App() {
   function copyToken(){
     navigator.clipboard.writeText(token)
     .then(() => {
-      
+      toast.success('Token başarıyla kopyalandı')
     })
     .catch((err) => {
-      console.error("Kopyalama sırasında bir hata oluştu: ", err)
+      toast.error('Token kopyalanamadı!')
+      console.error("Hata: ", err)
     })
   }
 
@@ -35,10 +38,9 @@ function App() {
       <div className="w-[380px] h-full">
         <div className="mockup-browser border-base-300 border">
         <div className="mockup-browser-toolbar">
-          <div className="input border-base-300 border font-bold">Discord Token Watcher</div>
+          <div className="input border-base-300 border font-semibold"><a className='text-[14px] mr-1' target='_blank' href="https://github.com/burakbehlull/discord-token-watcher">/</a>Discord Token Watcher</div>
         </div>
           <div className='px-4 py-6'>
-            {/* <h2 className='pt-3 text-2xl font-bold'>Discord Token Watcher</h2> */}
             <p className="text-sm break-words">
               {token ? `${token}` : 'No token found'}
             </p>
@@ -47,6 +49,8 @@ function App() {
               styles="mt-4"
               handleClick={copyToken}
             />
+            <br />
+            
           </div>
         </div>
       </div>
