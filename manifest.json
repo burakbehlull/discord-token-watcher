@@ -9,10 +9,23 @@
     "storage"
   ],
 
-  
+  "content_scripts": [
+    {
+      "matches": ["https://discord.com/*"],
+      "js": ["src/content/contentScript.js"],
+      "run_at": "document_start"
+    }
+  ],
 
   "host_permissions": [
     "*://*/*"
-  ]
-  
+  ],
+  "action": {
+	  "default_title":"Discord Token Watcher",
+    "default_popup": "src/views/dist/index.html",
+    "default_icon": {}
+  },
+  "background": {
+	  "service_worker": "./src/background/background.js"
+  }
 }
